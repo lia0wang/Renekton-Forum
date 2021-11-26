@@ -2,6 +2,9 @@
 {% block content %}
     <p>Topic: {{ topic }}</p>
         <p>Posts:</p>
+        <p>
+            <a href="{% url 'app_renekton:new_post' topic.id %}">Add new post</a>
+        </p>
     <ul>
         {% for post in posts %}
         <li>

@@ -1,0 +1,10 @@
+{% extends "app_renekton/base.html" %}
+{% block content %}
+<p><a href="{% url 'app_renekton:topic' topic.id %}">{{ topic }}</a></p>
+<p>Add a new post:</p>
+<form action="{% url 'app_renekton:new_post' topic.id %}" method='post'>
+       {% csrf_token %}
+       {{ form.as_p }}
+       <button name='submit'>Add post</button>
+     </form>
+   {% endblock content %}

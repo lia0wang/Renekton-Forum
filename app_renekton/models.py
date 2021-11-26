@@ -3,7 +3,7 @@ from django.db.models.fields import TimeField
 from django.db.models.fields.related import ForeignKey
 
 class Topic(models.Model):
-    """A topic the user is learning about."""
+    """A topic the user is interested about."""
     # use CharField when you want to store a small amount of text
     topic_name = models.CharField(max_length=200)
 
