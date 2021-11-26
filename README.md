@@ -1,2 +1,2 @@
-# lia0wang-blog
-A python web app that allows users to log the topics they’re interested in and to make posts.
+# Renekton
+The **Renekton forum** is an online discussion board where people can ask questions, share their experiences, and discuss topics of mutual interest.
