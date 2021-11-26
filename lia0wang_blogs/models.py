@@ -27,11 +27,15 @@ class Entry(models.Model):
 
     class Meta:
         # hold extra info to hold a model
+
+        # 'verbose_name_plural' is an attribute of class Meta
         # use 'entries' instead of 'entrys' when the entry > 1
-        many_entry = 'entries'
+        verbose_name_plural = 'entries'
     
     def __str__(self):
         '''Return a str representation of the model.'''
         # only the first 50 words will be shown also an ellipsis to
         # show the text of the entry is not completely displayed
-        return f"{self.text[0:50]}..."
+        if len(self.text) > 50:
+            return f"{self.text[0:50]}..."
+        return self.text

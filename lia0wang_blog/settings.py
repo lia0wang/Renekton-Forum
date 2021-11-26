@@ -33,7 +33,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     # My App
-    'app_infrastructure',
+    'lia0wang_blogs',
     # Default
     'django.contrib.admin',
     'django.contrib.auth',
