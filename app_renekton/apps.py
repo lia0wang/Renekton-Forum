@@ -3,4 +3,4 @@ from django.apps import AppConfig
 
 class AppInfrastructureConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'lia0wang_blogs'
+    name = 'app_renekton'

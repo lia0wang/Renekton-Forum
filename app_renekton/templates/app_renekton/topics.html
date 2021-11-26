@@ -1,9 +1,9 @@
-{% extends "lia0wang_blogs/base.html" %} {% block content %}
+{% extends "app_renekton/base.html" %} {% block content %}
 <p>Topics</p>
 <ul>
   {% for topic in topics %}
   <li>
-    <a href="{% url 'lia0wang_blogs:topic' topic.id %}">{{ topic }}</a>
+    <a href="{% url 'app_renekton:topic' topic.id %}">{{ topic }}</a>
   </li>
   {% empty %}
   <li>No topics have been added yet.</li>

@@ -2,7 +2,7 @@
 from django.urls import path # when mapping urls to views
 from . import views
 
-app_name = 'lia0wang_blogs'
+app_name = 'app_renekton'
 # list of urls that can be requested from the current app
 urlpatterns = [
     # Home page

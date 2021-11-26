@@ -1,5 +1,5 @@
 """
-WSGI config for lia0wang_blog project.
+WSGI config for renekton project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'lia0wang_blog.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'renekton.settings')
 
 application = get_wsgi_application()
