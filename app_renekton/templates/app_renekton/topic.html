@@ -10,9 +10,11 @@
         <li>
             <p>{{ post.date_added|date:'M d, Y H:i' }}</p>
             <p>{{ post.text|linebreaks }}</p>
+            {% if post.owner == request.user %}
             <p>
                 <a href="{% url 'app_renekton:edit_post' post.id %}">Edit post</a>
             </p>
+            {% endif %}
         </li>
         {% empty %}
             <li>There are no posts for this topic yet.</li>
