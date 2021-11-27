@@ -41,8 +41,12 @@ def new_topic(request):
         # POST data submitted; process data.
         form = TopicForm(data=request.POST)
         if form.is_valid():
-            form.save()
+            new_topic = form.save(commit=False)
+            # set the new topic’s owner attribute to the current user
+            new_topic.owner = request.user
+            new_topic.save()
             return redirect('app_renekton:topics')
+
     # Display a blank or invalid form.
     context = {'form': form}
     return render(request, 'app_renekton/new_topic.html', context)
