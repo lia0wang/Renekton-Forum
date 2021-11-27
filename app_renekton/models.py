@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models.fields import TimeField
 from django.db.models.fields.related import ForeignKey
+from django.contrib.auth.models import User
 
 class Topic(models.Model):
     """A topic the user is interested about."""
@@ -8,6 +9,7 @@ class Topic(models.Model):
     topic_name = models.CharField(max_length=200)
 
     date_added = models.DateTimeField(auto_now_add=True)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         """Return a string representation of the model."""
@@ -15,8 +17,8 @@ class Topic(models.Model):
 
 class Post(models.Model):
     """Something learned about a topic"""
-    # the topic attribute is a foreign key instance
-    # this is the code that connect each Post to a topic
+    # the Topic attribute is a foreign key instance
+    # this is the code that connect each Post to a Topic
     # key -> connect each piece of data
     # casacading delete -> on_delete=modles.CASCADE
     topic = ForeignKey(Topic, on_delete=models.CASCADE)
