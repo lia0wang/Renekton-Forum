@@ -14,8 +14,11 @@ def index(request):
 @login_required
 def topics(request):
     '''Topics page'''
-    topics = Topic.objects.order_by('date_added')        
+    topics = Topic.objects.order_by('date_added')
+
+    # topics are only visualable to the owners of them
     # topics = Topic.objects.filter(owner=request.user).order_by('date_added')
+
     context = {'topics': topics}
     return render(request, 'app_renekton/topics.html', context)
 
@@ -23,9 +26,11 @@ def topics(request):
 def topic(request, topic_id):
     '''Show a single topic and all its posts.'''
     topic = Topic.objects.get(id=topic_id)
-    # if the topic is not belong to the current user
+
+    # if the user is not the owner of the topic, he cannot access the topic
     # if topic.owner != request.user:
     #     raise Http404
+
     # '-' sorts the results in reverse order to display the most recent post
     posts = topic.post_set.order_by('-date_added')
     context = {'topic': topic, 'posts': posts}
@@ -41,12 +46,14 @@ def new_topic(request):
         # POST data submitted; process data.
         form = TopicForm(data=request.POST)
         if form.is_valid():
-            form.save()
-            # new_topic = form.save(commit=False)
-            # # set the new topic’s owner attribute to the current user
-            # new_topic.owner.append(request.user)
-            # new_topic.save()
+            # form.save()
+
+            new_topic = form.save(commit=False)
+            # set the new topic’s owner attribute to the user who created it 
+            new_topic.owner = request.user
+            new_topic.save()
             return redirect('app_renekton:topics')
+
     # Display a blank or invalid form.
     context = {'form': form}
     return render(request, 'app_renekton/new_topic.html', context)
@@ -67,9 +74,12 @@ def new_post(request, topic_id):
         if form.is_valid():
             new_post = form.save(commit=False)
             new_post.topic = topic
+
+            # set the owner of the new added post to the user who create the post
             new_post.owner = request.user
             new_post.save()
             return redirect('app_renekton:topic', topic_id=topic_id)
+
     # Display a blank or invalid form.
     context = {'topic': topic, 'form': form}
     return render(request, 'app_renekton/new_post.html', context)
@@ -79,6 +89,8 @@ def edit_post(request, post_id):
     '''Edit the current post'''
     post = Post.objects.get(id=post_id)
     topic = post.topic
+
+    # a user cannot edit the post if he is not the owner of the post
     if post.owner != request.user:
         raise Http404
 
