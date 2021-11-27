@@ -1,23 +1,29 @@
-{% extends 'app_renekton/base.html' %}
-{% block content %}
-    <p>Topic: {{ topic }}</p>
-        <p>Posts:</p>
-        <p>
-            <a href="{% url 'app_renekton:new_post' topic.id %}">Add new post</a>
-        </p>
-    <ul>
-        {% for post in posts %}
-        <li>
-            <p>{{ post.date_added|date:'M d, Y H:i' }}</p>
-            <p>{{ post.text|linebreaks }}</p>
-            {% if post.owner == request.user %}
-            <p>
-                <a href="{% url 'app_renekton:edit_post' post.id %}">Edit post</a>
-            </p>
-            {% endif %}
-        </li>
-        {% empty %}
-            <li>There are no posts for this topic yet.</li>
-        {% endfor %}
-    </ul>
-{% endblock content %}
+{% extends 'app_renekton/base.html' %} {% block page_header %}
+<h1>{{ topic }}</h1>
+{% endblock page_header %} {% block content %}
+<p>
+  <a
+    style="font-size: medium"
+    href="{% url 'app_renekton:new_post' topic.id %}"
+    >Add new post</a
+  >
+</p>
+{% for post in posts %}
+<div class="card mb-3">
+  <h4 class="card-header">
+    <div style="font-size:medium;">
+      username: {{ post.owner}} {% if post.owner == request.user %}
+      <a href="{% url 'app_renekton:edit_post' post.id %}">edit your post</a>
+
+      {% endif %}
+      <br>
+      time: {{ post.date_added|date:'M d, Y H:i' }}
+    </div>
+
+  </h4>
+  <div class="card-body">{{ post.text|linebreaks }}</div>
+</div>
+
+{% empty %}
+<p>There are no posts for this topic yet.</p>
+{% endfor %} {% endblock content %}
