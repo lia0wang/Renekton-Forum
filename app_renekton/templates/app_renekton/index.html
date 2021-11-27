@@ -1,5 +1,10 @@
 {% extends "app_renekton/base.html" %}
-<p>Renekton</p>
-{% block content %}
-<p>Renekton - Feel free to post anything about your interested topics!</p>
-{% endblock content %}
+
+{% block page_header %}
+<div class="jumbotron">
+<h1 class="display-3">Renekton</h1>
+<h2 class="display-5">A community forums for League of Legends.</h2>
+<p class="lead"><strong>Renekton</strong> is an online discussion board where players can ask questions, share their experiences, and discuss topics of mutual interest.</p>
+<a class="btn btn-lg btn-primary" href="{% url 'users:register' %}" role="button">Register &raquo;</a>
+</div>
+{% endblock page_header %}

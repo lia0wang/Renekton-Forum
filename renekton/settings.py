@@ -35,6 +35,10 @@ INSTALLED_APPS = [
     # My App
     'app_renekton',
     'users',
+
+    # Third party apps.
+    'bootstrap4',
+
     # Default
     'django.contrib.admin',
     'django.contrib.auth',
