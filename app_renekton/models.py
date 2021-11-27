@@ -26,6 +26,7 @@ class Post(models.Model):
     text = models.TextField()
     # present the posts in order, place a timestamp next to each Post
     date_added = TimeField(auto_now_add=True)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:
         # hold extra info to hold a model

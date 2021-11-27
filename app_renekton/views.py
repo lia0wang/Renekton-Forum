@@ -14,8 +14,8 @@ def index(request):
 @login_required
 def topics(request):
     '''Topics page'''
-    # topics = Topic.objects.order_by('date_added')        
-    topics = Topic.objects.filter(owner=request.user).order_by('date_added')
+    topics = Topic.objects.order_by('date_added')        
+    # topics = Topic.objects.filter(owner=request.user).order_by('date_added')
     context = {'topics': topics}
     return render(request, 'app_renekton/topics.html', context)
 
@@ -24,8 +24,8 @@ def topic(request, topic_id):
     '''Show a single topic and all its posts.'''
     topic = Topic.objects.get(id=topic_id)
     # if the topic is not belong to the current user
-    if topic.owner != request.user:
-        raise Http404
+    # if topic.owner != request.user:
+    #     raise Http404
     # '-' sorts the results in reverse order to display the most recent post
     posts = topic.post_set.order_by('-date_added')
     context = {'topic': topic, 'posts': posts}
@@ -41,12 +41,12 @@ def new_topic(request):
         # POST data submitted; process data.
         form = TopicForm(data=request.POST)
         if form.is_valid():
-            new_topic = form.save(commit=False)
-            # set the new topic’s owner attribute to the current user
-            new_topic.owner = request.user
-            new_topic.save()
+            form.save()
+            # new_topic = form.save(commit=False)
+            # # set the new topic’s owner attribute to the current user
+            # new_topic.owner.append(request.user)
+            # new_topic.save()
             return redirect('app_renekton:topics')
-
     # Display a blank or invalid form.
     context = {'form': form}
     return render(request, 'app_renekton/new_topic.html', context)
@@ -55,8 +55,8 @@ def new_topic(request):
 def new_post(request, topic_id):
     """Add a new post for a particular topic."""
     topic = Topic.objects.get(id=topic_id)
-    if topic.owner != request.user:
-        raise Http404
+    # if topic.owner != request.user:
+    #     raise Http404
 
     if request.method != 'POST':
         # No data submitted; create a blank form.
@@ -67,6 +67,7 @@ def new_post(request, topic_id):
         if form.is_valid():
             new_post = form.save(commit=False)
             new_post.topic = topic
+            new_post.owner = request.user
             new_post.save()
             return redirect('app_renekton:topic', topic_id=topic_id)
     # Display a blank or invalid form.
@@ -78,7 +79,7 @@ def edit_post(request, post_id):
     '''Edit the current post'''
     post = Post.objects.get(id=post_id)
     topic = post.topic
-    if topic.owner != request.user:
+    if post.owner != request.user:
         raise Http404
 
     if request.method != 'POST':
