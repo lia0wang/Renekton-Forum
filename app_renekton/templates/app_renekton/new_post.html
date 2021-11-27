@@ -1,10 +1,18 @@
 {% extends "app_renekton/base.html" %}
+{% load bootstrap4 %}
+
+{% block page_header %}
+<h2>Enter a new post:</h2>
+{% endblock page_header %}
+
 {% block content %}
-<p><a href="{% url 'app_renekton:topic' topic.id %}">{{ topic }}</a></p>
-<p>Add a new post:</p>
-<form action="{% url 'app_renekton:new_post' topic.id %}" method='post'>
-       {% csrf_token %}
-       {{ form.as_p }}
-       <button name='submit'>Add post</button>
-     </form>
-   {% endblock content %}
+
+<form method="post" action="{% url 'app_renekton:new_post' topic.id %}" class="form">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% buttons %}
+    <button name="submit" class="btn btn-primary">Add post</button>
+    {% endbuttons %}
+</form>
+
+{% endblock content %}

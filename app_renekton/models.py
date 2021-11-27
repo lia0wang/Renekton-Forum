@@ -1,5 +1,4 @@
 from django.db import models
-from django.db.models.fields import TimeField
 from django.db.models.fields.related import ForeignKey
 from django.contrib.auth.models import User
 
@@ -25,7 +24,7 @@ class Post(models.Model):
     # size of individual limit 
     text = models.TextField()
     # present the posts in order, place a timestamp next to each Post
-    date_added = TimeField(auto_now_add=True)
+    date_added = models.DateTimeField(auto_now_add=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:
