@@ -34,6 +34,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     # My App
     'app_renekton',
+    'users',
     # Default
     'django.contrib.admin',
     'django.contrib.auth',
