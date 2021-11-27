@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Topic
+from .models import Topic, Post
 from .forms import PostForm, TopicForm
 
 # Create your views here.
@@ -53,3 +53,23 @@ def new_post(request, topic_id):
     # Display a blank or invalid form.
     context = {'topic': topic, 'form': form}
     return render(request, 'app_renekton/new_post.html', context)
+
+def edit_post(request, post_id):
+    '''Edit the current post'''
+    post = Post.objects.get(id=post_id)
+    topic = post.topic
+
+    if request.method != 'POST':
+        # So the user will see their exist info of the current post so they can edit it
+        form = PostForm(instance=post)
+    else:
+        # process POST data
+        form = PostForm(instance=post, data=request.POST)
+        if form.is_valid():
+            form.save()
+            # redirect to the topic page, where the user should see the updated version of the entry they edited
+            return redirect('app_renekton:topic', topic_id=topic.id)
+    
+    # if the no data submitted or the form is invalid, render the page using the edit_post html template
+    context = {'post': post, 'topic': topic, 'form': form}
+    return render(request, 'app_renekton/edit_post.html', context)

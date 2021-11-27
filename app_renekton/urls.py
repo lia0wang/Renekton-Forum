@@ -13,5 +13,7 @@ urlpatterns = [
     path('new_topic/', views.new_topic, name='new_topic'),
     # Page for adding a new post
     path('new_post/<int:topic_id>/', views.new_post, name='new_post'),
+    # Page for editing a post
+    path('edit_post/<int:post_id>/', views.edit_post, name='edit_post'),
 ]
 
