@@ -16,4 +16,4 @@
 - Topic and Post both associate with each user through **ForeignKey User**.
 
 ## Logs
-- 27/11/2021 -> make the **edit post button** invisible if the user is not the owner of the post
+- 27/11/2021 -> make the **edit post button** invisible if the user is not the owner of the post.
