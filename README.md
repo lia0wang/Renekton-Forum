@@ -17,3 +17,4 @@
 
 ## Logs
 - 27/11/2021 -> make the **edit post button** invisible if the user is not the owner of the post.
+- 28/11/2021 -> fix the issue that the created date of post was not shown on the page hosted by heroku server but working properly on my local machine.
