@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
 from .models import Topic, Post
 from .forms import PostForm, TopicForm
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
-
 # Create your views here.
 def index(request):
     '''Home page'''
@@ -25,7 +25,7 @@ def topics(request):
 @login_required
 def topic(request, topic_id):
     '''Show a single topic and all its posts.'''
-    topic = Topic.objects.get(id=topic_id)
+    topic = get_object_or_404(Topic, id=topic_id)
 
     # if the user is not the owner of the topic, he cannot access the topic
     # if topic.owner != request.user:
@@ -61,7 +61,7 @@ def new_topic(request):
 @login_required
 def new_post(request, topic_id):
     """Add a new post for a particular topic."""
-    topic = Topic.objects.get(id=topic_id)
+    topic = get_object_or_404(Topic, id=topic_id)
     # if topic.owner != request.user:
     #     raise Http404
 
@@ -87,7 +87,7 @@ def new_post(request, topic_id):
 @login_required
 def edit_post(request, post_id):
     '''Edit the current post'''
-    post = Post.objects.get(id=post_id)
+    post = get_object_or_404(Post, id=post_id)
     topic = post.topic
 
     # a user cannot edit the post if he is not the owner of the post
