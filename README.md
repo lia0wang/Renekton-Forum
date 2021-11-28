@@ -6,7 +6,7 @@
 
 ## User
 - A user can add a topic and becomes the owner of the topic.
-- A user can access any topic in the forums.
+- A user can access any topic in the forum.
 - A user can add posts in others' topics where he/she is even not an owner of the topic.
 - A user cannot edit others' posts and can only edit his/her own post.
 
