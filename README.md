@@ -1,5 +1,5 @@
 # Overview
-- The **Renekton Forums** is an online discussion board for **League of Legends** where players can ask questions, share their experiences, and discuss topics of mutual interest.
+- The **Renekton Forum** is an online discussion board for **League of Legends** where players can ask questions, share their experiences, and discuss topics of mutual interest.
 
 ## Admin
 - The admin user owns all rights include add, edit, delete and can give authorization to all the topics, posts and users.
